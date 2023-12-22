@@ -1,7 +1,8 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationKeys} from '../../../../navigator/NavigationKeys';
+import {Surface, Text} from 'react-native-paper';
 
 const StoreItem = ({item}) => {
   const {navigate} = useNavigation();
@@ -10,7 +11,7 @@ const StoreItem = ({item}) => {
   };
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={{padding: 20}}>
+      <Surface style={styles.surface} elevation={2}>
         <Text style={{color: '#000', fontSize: 10}}>{item?.type}</Text>
         <Text style={{color: '#000', fontSize: 20}}>{item?.name}</Text>
         <Text style={{color: '#000', fontSize: 12}}>{item?.address}</Text>
@@ -22,9 +23,20 @@ const StoreItem = ({item}) => {
             Type: <Text style={{fontStyle: 'italic'}}>{item?.route}</Text>
           </Text>
         </View>
-      </View>
+      </Surface>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  surface: {
+    padding: 8,
+    // height: 80,
+    // width: 80,
+    // alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+});
 
 export default StoreItem;
