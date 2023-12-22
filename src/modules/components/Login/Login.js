@@ -1,23 +1,26 @@
 import {View, Text} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import Button from '../../common/Button/Button';
 import InputBox from '../../common/InputBox/InputBox';
 import {ScreenWrapper} from '../../common/ScreenWrapper/ScreenWrapper';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationKeys} from '../../navigator/NavigationKeys';
+import useAuthHook from '../../../hooks/useAuthHook';
 
 const Login = () => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const {loggedIn, loginAction, password, setPassword, userName, setUserName} =
+    useAuthHook();
 
   const {replace} = useNavigation();
+
   const handleLogin = async () => {
-    console.log(userName);
-    console.log(password);
-    replace(NavigationKeys.ALL_STORES);
+    await loginAction();
   };
 
+  useEffect(()=>{
+    if(loggedIn) replace(NavigationKeys.ALL_STORES)
+  },[loggedIn])
   return (
     <ScreenWrapper>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
