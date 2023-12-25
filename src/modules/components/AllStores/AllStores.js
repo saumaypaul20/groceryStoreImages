@@ -4,16 +4,19 @@ import {ScreenWrapper} from '../../common/ScreenWrapper/ScreenWrapper';
 import StoreList from './StoreList/StoreList';
 import {StoreService} from '../../../services/stores.service';
 import SearchBar from '../../common/SearchBar/SearchBar';
+import Filters from './Filters/Filters';
 
 const AllStores = () => {
   const [stores, setStores] = useState([]);
-  
+
   useEffect(() => {
-    (async () => {
-      const stores = await StoreService.getStoreList();
-      setStores(stores);
-    })();
+    fetchStores()
   }, []);
+
+  const fetchStores = async ()=>{
+    const stores = await StoreService.getStoreList();
+    setStores(stores);
+  }
 
   return (
     <ScreenWrapper>
@@ -23,8 +26,9 @@ const AllStores = () => {
         </Text>
       </View>
       <View style={{marginVertical:10, flexDirection:'row'}}>
-        <View style={{flex:5}}><SearchBar /></View>
-        <View style={{flex:1}}><Text>Filters</Text></View>
+        <View style={{width: '90%'}}><SearchBar /></View>
+        <View style={{width: '10%'}}><Filters setStores={setStores} stores={stores}/>
+          </View>
         
       </View>
       <View style={{marginTop: 20}}>

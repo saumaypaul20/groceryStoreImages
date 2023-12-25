@@ -18,9 +18,11 @@ const Login = () => {
     await loginAction();
   };
 
-  useEffect(()=>{
-    if(loggedIn) replace(NavigationKeys.ALL_STORES)
-  },[loggedIn])
+  useEffect(() => {
+    if (loggedIn) {
+      replace(NavigationKeys.ALL_STORES);
+    }
+  }, [loggedIn]);
   return (
     <ScreenWrapper>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

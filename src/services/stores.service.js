@@ -35,4 +35,40 @@ export const StoreService = {
     });
     return storeImages;
   },
+  getStoreFilters: async store_id => {
+    const filtersCollection = firestore().collection('filters');
+    const filtersCollectionDocs = await filtersCollection.get();
+    const filters = filtersCollectionDocs.docs.map(doc => {
+      // const id = doc.id;
+      const item = doc.data();
+      console.log("🚀 ~ file: stores.service.js ~ line 46 ~ item", item)
+      return item
+    });
+    return filters;
+  },
+  // addFilters: async (data) => {
+  //   const filters = FILTERS;
+  //   const filtersAdded ={}
+  //   for (const filter of filters) {
+  //     let filterData = data.map(item => item[filter]);
+  //     filterData = uniq(filterData);
+      
+  //      const _tempF = filterData.map(item=>{
+  //       return item;
+       
+  //     });
+  //     filtersAdded[filter] = _tempF
+  //   }
+  //   console.log('filtersAdded',filtersAdded)
+  //    const createFilter = firestore().collection('filters');
+  //       return createFilter
+  //         .add(filtersAdded)
+  //         .then(response => {
+  //         console.log("🚀 ~ file: stores.service.js ~ line 58 ~ addFilters: ~ response", response)
+  //           return response;
+  //         })
+  //         .catch(err => err.message);
+
+  //   // return filtersAdded
+  // },
 };

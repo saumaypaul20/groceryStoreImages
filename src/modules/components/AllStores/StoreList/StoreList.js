@@ -2,7 +2,7 @@ import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import React from 'react';
 import StoreItem from './StoreItem/StoreItem';
 
-const ITEM_HEIGHT = 117.3;
+const ITEM_HEIGHT = 113.3;
 
 const StoreList = ({data}) => {
 
