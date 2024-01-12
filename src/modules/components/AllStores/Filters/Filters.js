@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Modal, ScrollView, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {Checkbox, Button, PaperProvider} from 'react-native-paper';
+import {Checkbox, Button} from 'react-native-paper';
 import {StoreService} from '../../../../services/stores.service';
 import {FILTERS} from '../../../../utils/constants';
 import firestore from '@react-native-firebase/firestore';
@@ -130,6 +130,7 @@ const Filters = ({stores, setStores}) => {
                       </Text>
                       {values?.map(value => (
                         <Checkbox.Item
+                          key={value}
                           label={value}
                           status={
                             selectedFilters[filterKey]?.[value]

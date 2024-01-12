@@ -18,4 +18,16 @@ export const AuthService = {
         }
       });
   },
+
+  logout: () => {
+    return auth()
+      .signOut()
+      .then(() => {
+        console.log('User signed out!');
+        return true;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
 };

@@ -10,7 +10,8 @@ import useAuthHook from '../../../hooks/useAuthHook';
 
 const Login = () => {
   const {loggedIn, loginAction, password, setPassword, userName, setUserName} =
-    useAuthHook();
+  useAuthHook();
+  console.log("🚀 ~ file: Login.js ~ line 13 ~ Login ~ loggedIn", loggedIn)
 
   const {replace} = useNavigation();
 
@@ -28,16 +29,19 @@ const Login = () => {
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={styles.form}>
           <InputBox
+            keyboardType={'email-address'}
             value={userName}
             onChange={setUserName}
             placeholder="Username"
             extraStyles={{width: '60%', marginBottom: 10}}
           />
           <InputBox
+            // keyboardType="password"
             value={password}
             onChange={setPassword}
             placeholder="Password"
             extraStyles={{width: '60%', marginBottom: 10}}
+            secureTextEntry
           />
           <Button title={'Login'} onPress={handleLogin} />
         </View>

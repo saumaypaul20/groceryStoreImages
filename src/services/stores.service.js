@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const StoreService = {
   getStoreList: async () => {
@@ -12,9 +13,11 @@ export const StoreService = {
     return stores;
   },
   uploadStoreImages: async (store_id, file_uri) => {
+    const user = JSON.parse(await AsyncStorage.getItem('loggedIn'));
     const storesImagesCollection = firestore().collection('images');
     return storesImagesCollection
       .add({
+        uid: user.uid,
         store_id,
         uri: file_uri,
       })
@@ -24,9 +27,11 @@ export const StoreService = {
       .catch(err => err.message);
   },
   getStoreImages: async store_id => {
+    const user = JSON.parse(await AsyncStorage.getItem('loggedIn'));
     const storesImagesCollection = firestore().collection('images');
     const storesImageDocs = await storesImagesCollection
       .where('store_id', '==', store_id)
+      .where('uid', '==', user.uid)
       .get();
     const storeImages = storesImageDocs.docs.map(doc => {
       const id = doc.id;
@@ -35,14 +40,13 @@ export const StoreService = {
     });
     return storeImages;
   },
-  getStoreFilters: async store_id => {
+  getStoreFilters: async () => {
     const filtersCollection = firestore().collection('filters');
     const filtersCollectionDocs = await filtersCollection.get();
     const filters = filtersCollectionDocs.docs.map(doc => {
       // const id = doc.id;
       const item = doc.data();
-      console.log("🚀 ~ file: stores.service.js ~ line 46 ~ item", item)
-      return item
+      return item;
     });
     return filters;
   },

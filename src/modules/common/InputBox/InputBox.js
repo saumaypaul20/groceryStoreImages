@@ -2,7 +2,8 @@ import {TextInput, View} from 'react-native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-const InputBox = ({value, onChange, placeholder, extraStyles}) => {
+const InputBox = (props) => {
+  const {value, onChange, placeholder, extraStyles, keyboardType, secureTextEntry} = props;
   return (
     <TextInput
       style={{...styles.inputBox, ...extraStyles}}
@@ -10,6 +11,8 @@ const InputBox = ({value, onChange, placeholder, extraStyles}) => {
       onChangeText={onChange}
       placeholder={placeholder}
       placeholderTextColor={'#444'}
+      keyboardType={keyboardType}
+      secureTextEntry={secureTextEntry}
     />
   );
 };

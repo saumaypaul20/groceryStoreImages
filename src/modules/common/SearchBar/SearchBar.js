@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Searchbar} from 'react-native-paper';
 
-const SearchBar = () => {
+const SearchBar = ({setSearchTerm}) => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
-  const onChangeSearch = query => setSearchQuery(query);
+  useEffect(()=>{
+    setSearchTerm(searchQuery)
+  },[searchQuery])
 
   return (
     <Searchbar
       placeholder="Search"
-      onChangeText={onChangeSearch}
+      onChangeText={setSearchQuery}
       value={searchQuery}
       icon="magnify"
     />

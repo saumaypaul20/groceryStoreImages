@@ -11,7 +11,7 @@ const StoreList = ({data}) => {
   };
 
   const keyExtractor = (item, index) => {
-    return item.id.toString();
+    return item.id.toString() + index.toString();
   };
 
   const EmptyComponent = () => {
